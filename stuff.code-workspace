@@ -5,6 +5,10 @@
       "name": "main"
     },
     {
+      "path": "../../PythonProjects/yml_json_matcher_py/yml_json_matcher/scripts",
+      "name": "yml_json_matcher"
+    },
+    {
       "path": "/Users/carlosmorales/Downloads"
     }
   ],
