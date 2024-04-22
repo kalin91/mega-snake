@@ -30,7 +30,6 @@
       "editor.links": true
     },
     "[groovy]": {
-      "editor.defaultFormatter": "marlon407.code-groovy"
     },
     "[markdown]": {
       "editor.unicodeHighlight.ambiguousCharacters": false,
