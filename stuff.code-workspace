@@ -10,6 +10,10 @@
     },
     {
       "path": "/Users/carlosmorales/Downloads"
+    },
+    {
+      "name": "home",
+      "path": "../.."
     }
   ],
   "settings": {
@@ -20,8 +24,8 @@
       "zsh": {
         "path": "zsh",
         "env": {
-          "VER_GRADLE":"8",
-          "VER_JAVA":"11.0.22"
+          "VER_GRADLE": "8",
+          "VER_JAVA": "11.0.22"
         }
       }
     },
@@ -29,8 +33,7 @@
     "[log]": {
       "editor.links": true
     },
-    "[groovy]": {
-    },
+    "[groovy]": {},
     "[markdown]": {
       "editor.unicodeHighlight.ambiguousCharacters": false,
       "editor.unicodeHighlight.invisibleCharacters": false,
@@ -50,10 +53,9 @@
         "/Users/carlosmorales/IdeaProjects/ocm_pd_totf-api_product-information-api/src/verify/java/com/homedepot/functionalTests"
       ]
     },
-  "java.format.settings.url": "/Users/carlosmorales/IdeaProjects/ocm_pd_totf-api_product-information-api/.vscode/eclipse-formatter.xml",
+    "java.format.settings.url": "/Users/carlosmorales/IdeaProjects/ocm_pd_totf-api_product-information-api/.vscode/eclipse-formatter.xml",
     "markdownlint.config": {
-      "MD033":false
+      "MD033": false
     }
-
   }
 }
