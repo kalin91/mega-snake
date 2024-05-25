@@ -25,7 +25,9 @@
         "path": "zsh",
         "env": {
           "VER_GRADLE": "8",
-          "VER_JAVA": "11.0.22"
+          "VER_JAVA": "11.0.22",
+          "CHECK_GCLOUD": "false",
+          "UNTRACK_PROPS": "false" // remoteBranchesDetails
         }
       }
     },
