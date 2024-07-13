@@ -17,6 +17,12 @@
     }
   ],
   "settings": {
+    "files.exclude": {
+      "**/IdeaProjects": true,
+    },
+    "search.exclude": {
+      "**/IdeaProjects": true,
+    },
     "[java]": {
       "editor.defaultFormatter": "redhat.java"
     },
