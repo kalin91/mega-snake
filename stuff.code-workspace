@@ -7,15 +7,19 @@
     {
       "path": "../../PythonProjects/yml_json_matcher_py/yml_json_matcher/scripts",
       "name": "yml_json_matcher"
-    },
-    {
-      "path": "/Users/carlosmorales/Downloads"
-    },
-    {
-      "name": "home",
-      "path": "../.."
     }
   ],
+  "launch": {
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Python Debugger: Python File",
+        "type": "debugpy",
+        "request": "launch",
+        "program": "${file}"
+      }
+    ]
+  },
   "settings": {
     "files.exclude": {
       "**/IdeaProjects": true,
