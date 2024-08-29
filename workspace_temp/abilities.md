@@ -52,7 +52,8 @@ My proficiency in Linux is demonstrated through various scripting and system man
 
 1. **Shell Scripting:**
    - **Environment Setup and Configuration:** Skilled in writing and managing shell scripts for setting up environments, including configuring environment variables and application settings.
-   - **File and Directory Operations:** Proficient in handling file operations such as creating, deleting, and modifying files and directories.
+   - **Task Automation:** Automated repetitive tasks such as backups, file processing, and system monitoring using shell scripting, including the use of `cron` jobs for scheduled tasks.
+   - **File and Directory Operations:** Proficient in handling file operations such as creating, deleting, and modifying files and directories, with experience in using `tar` for file decompression.
    - **Task Automation:** Experienced in automating repetitive tasks, such as processing files and generating reports, to enhance efficiency.
 
 2. **Command-Line Tools:**
@@ -63,21 +64,24 @@ My proficiency in Linux is demonstrated through various scripting and system man
    - **Functions and Variables:** Proficient in defining and using functions, handling variables, and implementing error-checking mechanisms in scripts.
    - **Integration with External Tools:** Experience integrating shell scripts with external tools and APIs, such as interacting with cloud services and managing external applications.
    - **Error Handling:** Implemented robust error handling and logging mechanisms to ensure script reliability and facilitate debugging.
+   - **Process Control:** Experienced in starting, stopping, and managing background processes with commands such as `nohup &` and `kill`.
 
 4. **Version Control and Git:**
    - **Branch and Commit Management:** Experienced with creating and managing branches, committing changes, and analyzing differences between commits.
    - **Automating Git Commands:** Created scripts to automate Git commands, such as generating diffs and comparing branches, to streamline workflows.
 
 5. **System Utilities and Tools:**
-   - **Command-line Utilities:** Proficient in using system utilities like `keytool` for managing Java KeyStores, `brew` for package management, and `tput` for terminal color management.
+   - **Command-line Utilities:** Proficient in using system utilities like `keytool` for managing Java KeyStores.
+   - **Package Management:** Familiar with managing software installations using `apt-get`, `zypper`, and `brew`, ensuring that systems are up-to-date with the latest packages.
    - **Custom Commands and Aliases:** Developed custom commands and aliases to simplify and automate repetitive tasks, improving productivity.
+   - **Container Management:** Familiar with essential Docker commands like `docker ps`, `docker exec` and `docker cp` for managing container
 
 6. **Version and Dependency Management:**
    - **Software Version Management:** Developed scripts to manage software versions and dependencies, including switching between versions and handling installations.
 
 7. **Security and Permissions:**
    - **File Permissions:** Proficient in managing file and directory permissions, including setting ownership and access controls using `chmod` and `chown`.
-
+   - **Secure File Transfer:** Skilled in securely transferring files using `sftp` and `scp`, ensuring data integrity and security.
 ## Proficiency in Python Scripts
 
 My proficiency in Python is demonstrated through a range of scripting and automation tasks. Here are some key skills:
