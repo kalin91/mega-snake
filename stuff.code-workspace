@@ -21,6 +21,7 @@
     ]
   },
   "settings": {
+    "python.defaultInterpreterPath": "stuff/py/bin/python3",
     "files.exclude": {
       "**/IdeaProjects": true,
     },
