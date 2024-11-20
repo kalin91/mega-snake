@@ -3,10 +3,6 @@
     {
       "path": ".",
       "name": "main"
-    },
-    {
-      "path": "../../PythonProjects/yml_json_matcher_py/yml_json_matcher/scripts",
-      "name": "yml_json_matcher"
     }
   ],
   "launch": {
@@ -21,7 +17,7 @@
     ]
   },
   "settings": {
-    "python.defaultInterpreterPath": "stuff/py/bin/python3",
+    "python.defaultInterpreterPath": "${workspaceFolder:main}/py/bin/python3",
     "files.exclude": {
       "**/IdeaProjects": true,
     },
