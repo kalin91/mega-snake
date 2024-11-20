@@ -65,6 +65,9 @@
     "java.format.settings.url": "/Users/carlosmorales/IdeaProjects/ocm_pd_totf-api_product-information-api/.vscode/eclipse-formatter.xml",
     "markdownlint.config": {
       "MD033": false
-    }
+    },
+    "pylint.args": [
+      "--max-line-length=200"
+    ]
   }
 }
