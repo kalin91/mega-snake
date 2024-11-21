@@ -17,7 +17,7 @@
     ]
   },
   "settings": {
-    "python.defaultInterpreterPath": "${workspaceFolder:main}/py/bin/python3",
+    "python.defaultInterpreterPath": ".venv/bin/python3",
     "files.exclude": {
       "**/IdeaProjects": true,
     },
