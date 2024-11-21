@@ -9,20 +9,51 @@
     "version": "0.2.0",
     "configurations": [
       {
+        "type": "java",
+        "name": "Debug Java App (Attach)",
+        "request": "attach",
+        "hostName": "localhost",
+        "port": 5005
+      },
+      {
         "name": "Python Debugger: Python File",
         "type": "debugpy",
         "request": "launch",
         "program": "${file}"
+      },
+      {
+        "name": "Python Debugger: Setup Module",
+        "preLaunchTask": "Activate Python Virtual Environment",
+        "type": "debugpy",
+        "env": {
+          "PYTHONPATH": "py",
+          "WS_TEMP": "${workspaceFolder}/workspace_temp"
+        },
+        "request": "launch",
+        "module": "py",
+        "args": [
+          "createDiffTree"
+        ]
+      },
+      {
+        "name": "Python Debugger: Python Module",
+        "type": "debugpy",
+        "env": {
+          "PYTHONPATH": "${fileDirnameBasename}"
+        },
+        "request": "launch",
+        "module": "${fileDirnameBasename}",
+        "args": []
       }
     ]
   },
   "settings": {
     "python.defaultInterpreterPath": ".venv/bin/python3",
     "files.exclude": {
-      "**/IdeaProjects": true,
+      "**/IdeaProjects": true
     },
     "search.exclude": {
-      "**/IdeaProjects": true,
+      "**/IdeaProjects": true
     },
     "[java]": {
       "editor.defaultFormatter": "redhat.java"
@@ -34,7 +65,7 @@
           "VER_GRADLE": "8",
           "VER_JAVA": "11.0.22",
           "CHECK_GCLOUD": "false",
-          "UNTRACK_PROPS": "false" // remoteBranchesDetails
+          "UNTRACK_PROPS": "false"
         }
       }
     },
@@ -56,7 +87,6 @@
       }
     },
     "git-blame.gitWebUrl": "https://github.com/one-thd/ocm_pd_totf-api_product-information-api/tree/$ID",
-
     "java.test.config": {
       "classPaths": [
         "/Users/carlosmorales/IdeaProjects/ocm_pd_totf-api_product-information-api/src/verify/java/com/homedepot/functionalTests"
@@ -68,6 +98,146 @@
     },
     "pylint.args": [
       "--max-line-length=200"
+    ],
+    "[html]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[vb]": {
+      "editor.defaultFormatter": "local-smart.excel-live-server",
+      "editor.semanticHighlighting.enabled": true,
+      "prettier.tabWidth": 8,
+      "files.encoding": "windows1250"
+    },
+    "editor.largeFileOptimizations": "false",
+    "editor.maxTokenizationLineLength": 2000000,
+    "files.associations": {
+      "**/.github/workflows/*.yml": "github-actions-workflow",
+      "*.yml": "yaml",
+      "*.gradle": "gradle"
+    },
+    "githubIssues.queries": [
+      {
+        "label": "My Issues",
+        "query": "is:open assignee:${user} repo:${owner}/${repository}",
+        "groupBy": [
+          "milestone"
+        ]
+      },
+      {
+        "label": "Created Issues",
+        "query": "author:${user} state:open repo:${owner}/${repository} sort:created-desc"
+      },
+      {
+        "label": "Recent Issues",
+        "query": "state:open repo:${owner}/${repository} sort:updated-desc"
+      }
+    ],
+    "githubPullRequests.queries": [
+      {
+        "label": "My Closed PRs",
+        "query": "is:closed author:${user}"
+      },
+      {
+        "label": "Waiting For My Review",
+        "query": "is:open review-requested:${user}"
+      },
+      {
+        "label": "Assigned To Me",
+        "query": "is:open assignee:${user}"
+      },
+      {
+        "label": "Created By Me",
+        "query": "is:open author:${user}"
+      }
+    ],
+    "jarFilePath": "build/libs/*.jar",
+    "java.jdt.ls.vmargs": "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx4G -Xms100m -Xlog:disable",
+    "logViewer.chunkSizeKb": 81920,
+    "logViewer.followTailMode": "auto",
+    "terminal.integrated.scrollback": 9000,
+    "logViewer.watch": [
+      {
+        "title": "GRADLE CLEAN BUILD NO TEST",
+        "pattern": "/Users/carlosmorales/IdeaProjects/stuff/workspace_temp/clean_build_no_test.log",
+        "autoScroll": true
+      },
+      {
+        "title": "GRADLE CLEAN BUILD",
+        "pattern": "/Users/carlosmorales/IdeaProjects/stuff/workspace_temp/clean_build.log",
+        "autoScroll": true
+      },
+      {
+        "title": "GENERIC LOG",
+        "pattern": "/Users/carlosmorales/IdeaProjects/stuff/workspace_temp/output.log",
+        "autoScroll": true
+      },
+      {
+        "title": "JAVA DEBUG LOG",
+        "pattern": "/Users/carlosmorales/IdeaProjects/stuff/workspace_temp/java_debug.log",
+        "autoScroll": true
+      },
+      {
+        "title": "SETUP_ENVIRONMENT_LOG",
+        "pattern": "/Users/carlosmorales/IdeaProjects/stuff/workspace_temp/setup_environment.log",
+        "autoScroll": true
+      }
+    ]
+  },
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Activate Python Virtual Environment",
+        "type": "shell",
+        "command": "bash",
+        "args": [
+          "-c",
+          "source /Users/carlosmorales/IdeaProjects/stuff/.venv/bin/activate"
+        ],
+        "group": "build",
+        "problemMatcher": [],
+        "detail": "Activates the Python virtual environment"
+      },
+      {
+        "label": "Gradle Clean Build No Tests",
+        "type": "shell",
+        "command": "bash",
+        "args": [
+          "-c",
+          "./gradlew clean build -x test > '/Users/carlosmorales/IdeaProjects/stuff/workspace_temp/clean_build_no_test.log'"
+        ],
+        "group": "build",
+        "problemMatcher": [],
+        "detail": "Runs the gradle clean build task and logs the output to folder/file.log"
+      },
+      {
+        "label": "Gradle Clean Build",
+        "type": "shell",
+        "command": "bash",
+        "args": [
+          "-c",
+          "./gradlew clean build > '/Users/carlosmorales/IdeaProjects/stuff/workspace_temp/clean_build.log'"
+        ],
+        "group": "build",
+        "problemMatcher": [],
+        "detail": "Runs the gradle clean build task and logs the output to folder/file.log"
+      },
+      {
+        "label": "Run Java App with Debugger and Log Output",
+        "type": "shell",
+        "command": "bash",
+        "args": [
+          "-c",
+          "java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 -Dspring.profiles.active=stage -Dspring.config.additional-location=workspace_temp/secrets/stage/applicationSecrets.yml -jar ${config:jarFilePath} > '/Users/carlosmorales/IdeaProjects/stuff/workspace_temp/java_debug.log' 2>&1"
+        ],
+        "problemMatcher": [],
+        "isBackground": false,
+        "group": {
+          "kind": "build",
+          "isDefault": true
+        },
+        "detail": "Runs the Java app with debugger and redirects output to java.log"
+      }
     ]
   }
 }
