@@ -158,27 +158,27 @@
     "logViewer.watch": [
       {
         "title": "GRADLE CLEAN BUILD NO TEST",
-        "pattern": "/Users/carlosmorales/IdeaProjects/stuff/workspace_temp/clean_build_no_test.log",
+        "pattern": "/Users/carlosmorales/IdeaProjects/stuff/workspace_temp/logs/clean_build_no_test.log",
         "autoScroll": true
       },
       {
         "title": "GRADLE CLEAN BUILD",
-        "pattern": "/Users/carlosmorales/IdeaProjects/stuff/workspace_temp/clean_build.log",
+        "pattern": "/Users/carlosmorales/IdeaProjects/stuff/workspace_temp/logs/clean_build.log",
         "autoScroll": true
       },
       {
         "title": "GENERIC LOG",
-        "pattern": "/Users/carlosmorales/IdeaProjects/stuff/workspace_temp/output.log",
+        "pattern": "/Users/carlosmorales/IdeaProjects/stuff/workspace_temp/logs/output.log",
         "autoScroll": true
       },
       {
         "title": "JAVA DEBUG LOG",
-        "pattern": "/Users/carlosmorales/IdeaProjects/stuff/workspace_temp/java_debug.log",
+        "pattern": "/Users/carlosmorales/IdeaProjects/stuff/workspace_temp/logs/java_debug.log",
         "autoScroll": true
       },
       {
         "title": "SETUP_ENVIRONMENT_LOG",
-        "pattern": "/Users/carlosmorales/IdeaProjects/stuff/workspace_temp/setup_environment.log",
+        "pattern": "/Users/carlosmorales/IdeaProjects/stuff/workspace_temp/logs/setup_environment_*.log",
         "autoScroll": true
       }
     ]
