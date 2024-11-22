@@ -34,7 +34,7 @@
         "args": [
           "-l",
           "DEBUG",
-          "remoteBranchesDetails"
+          "remoteBranchesCleanUp"
         ]
       },
       {
@@ -50,7 +50,11 @@
     ]
   },
   "settings": {
+    "mypy-type-checker.reportingScope": "workspace",
+    //"mypy-type-checker.args": ["--disable-error-code=[assignment, import-not-found]"],
+    //"mypy-type-checker.args": ["--disable-error-code=import-not-found", "--disable-error-code=assignment", "--disable-error-code=import-untyped"],
     "python.defaultInterpreterPath": ".venv/bin/python3",
+    "pylint.enabled": true,
     "files.exclude": {
       "**/IdeaProjects": true
     },
@@ -99,7 +103,14 @@
       "MD033": false
     },
     "pylint.args": [
-      "--max-line-length=200"
+      "--max-line-length=200",
+      "--enable=E1101",
+      "--load-plugins=pylint.extensions.mccabe,pyreverse",
+      "--extension-pkg-whitelist=typing",
+      "--generated-members=typing.*",
+      "--output-format=dot",
+      "--ignore=CVS",
+      "--output=uml_output"
     ],
     "[html]": {
       "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -182,7 +193,8 @@
         "autoScroll": true
       }
     ],
-    "editor.largeFileOptimizations": false
+    "editor.largeFileOptimizations": false,
+    "python.analysis.diagnosticMode": "workspace"
   },
   "tasks": {
     "version": "2.0.0",
