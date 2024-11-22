@@ -32,7 +32,9 @@
         "request": "launch",
         "module": "py",
         "args": [
-          "createDiffTree"
+          "-l",
+          "DEBUG",
+          "remoteBranchesDetails"
         ]
       },
       {
@@ -103,12 +105,10 @@
       "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "[vb]": {
-      "editor.defaultFormatter": "local-smart.excel-live-server",
       "editor.semanticHighlighting.enabled": true,
       "prettier.tabWidth": 8,
       "files.encoding": "windows1250"
     },
-    "editor.largeFileOptimizations": "false",
     "editor.maxTokenizationLineLength": 2000000,
     "files.associations": {
       "**/.github/workflows/*.yml": "github-actions-workflow",
@@ -181,7 +181,8 @@
         "pattern": "/Users/carlosmorales/IdeaProjects/stuff/workspace_temp/logs/setup_environment_*.log",
         "autoScroll": true
       }
-    ]
+    ],
+    "editor.largeFileOptimizations": false
   },
   "tasks": {
     "version": "2.0.0",
