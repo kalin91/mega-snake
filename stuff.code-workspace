@@ -59,6 +59,7 @@
     ]
   },
   "settings": {
+    "python.terminal.activateEnvironment": false,
     "mypy-type-checker.reportingScope": "workspace",
     "mypy-type-checker.importStrategy": "fromEnvironment",
     "mypy-type-checker.args": [
