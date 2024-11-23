@@ -24,6 +24,7 @@
       {
         "name": "Python Debugger: Setup Module",
         "preLaunchTask": "Activate Python Virtual Environment",
+        "postDebugTask": "Deactivate Python Virtual Environment",
         "type": "debugpy",
         "env": {
           "PYTHONPATH": "py",
@@ -32,12 +33,17 @@
         "request": "launch",
         "module": "py",
         "args": [
+          "--shell",
+          "zsh",
+          "--working-path",
+          "${workspaceFolder}/workspace_temp",
           "-l",
           "INFO",
           "msg",
           "dsdadwh",
+          "xD",
           "-t",
-          "a"
+          "t",
         ]
       },
       {
@@ -79,13 +85,12 @@
     },
     "terminal.integrated.profiles.osx": {
       "zsh": {
-        "path": "zsh",
-        "env": {
-          "VER_GRADLE": "8",
-          "VER_JAVA": "11.0.22",
-          "CHECK_GCLOUD": "false",
-          "UNTRACK_PROPS": "false"
-        }
+        "path": "zsh"
+      },
+      "bash": {
+        "path": "/opt/homebrew/bin/bash",
+        "args": [
+        ]
       }
     },
     "terminal.integrated.defaultProfile.osx": "zsh",
@@ -215,7 +220,7 @@
       {
         "label": "Activate Python Virtual Environment",
         "type": "shell",
-        "command": "bash",
+        "command": "zsh",
         "args": [
           "-c",
           "source /Users/carlosmorales/IdeaProjects/stuff/.venv/bin/activate"
@@ -227,7 +232,7 @@
       {
         "label": "Gradle Clean Build No Tests",
         "type": "shell",
-        "command": "bash",
+        "command": "zsh",
         "args": [
           "-c",
           "./gradlew clean build -x test > '/Users/carlosmorales/IdeaProjects/stuff/workspace_temp/clean_build_no_test.log'"
@@ -263,6 +268,19 @@
           "isDefault": true
         },
         "detail": "Runs the Java app with debugger and redirects output to java.log"
+      },
+      {
+        "label": "Deactivate Python Virtual Environment",
+        "type": "shell",
+        "command": "zsh",
+        "args": [
+          "-c",
+          "deactivate; exit"
+        ],
+        "group": "build",
+        "isBackground": true,
+        "problemMatcher": [],
+        "detail": "Deactivates the Python virtual environment"
       }
     ]
   }
