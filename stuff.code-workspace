@@ -27,18 +27,17 @@
         "postDebugTask": "Deactivate Python Virtual Environment",
         "type": "debugpy",
         "env": {
-          "PYTHONPATH": "py",
+          "PYTHONPATH": "${workspaceFolder}",
           "WS_TEMP": "${workspaceFolder}/workspace_temp"
         },
+        "console": "integratedTerminal",
         "request": "launch",
         "module": "py",
         "args": [
           "--shell",
           "zsh",
-          "--working-path",
-          "${workspaceFolder}/workspace_temp",
           "-l",
-          "INFO",
+          "debug",
           "msg",
           "dsdadwh",
           "xD",
@@ -59,7 +58,7 @@
     ]
   },
   "settings": {
-    "python.terminal.activateEnvironment": false,
+    "python.terminal.activateEnvironment": true,
     "mypy-type-checker.reportingScope": "workspace",
     "mypy-type-checker.importStrategy": "fromEnvironment",
     "mypy-type-checker.args": [
@@ -75,6 +74,13 @@
     //"mypy-type-checker.args": ["--disable-error-code=import-not-found", "--disable-error-code=assignment", "--disable-error-code=import-untyped"],
     "python.defaultInterpreterPath": ".venv/bin/python3",
     "pylint.enabled": true,
+    "pylint.cwd": "${workspaceFolder}/py",
+    "pylint.args": [
+      "--max-line-length=200",
+      "--disable=W0212",
+      "--max-args=10",
+      "--max-positional-arguments=8"
+    ],
     "files.exclude": {
       "**/IdeaProjects": true
     },
@@ -90,8 +96,7 @@
       },
       "bash": {
         "path": "/opt/homebrew/bin/bash",
-        "args": [
-        ]
+        "args": []
       }
     },
     "terminal.integrated.defaultProfile.osx": "zsh",
@@ -121,16 +126,6 @@
     "markdownlint.config": {
       "MD033": false
     },
-    "pylint.args": [
-      "--max-line-length=200",
-      "--enable=E1101",
-      "--load-plugins=pylint.extensions.mccabe,pyreverse",
-      "--extension-pkg-whitelist=typing",
-      "--generated-members=typing.*",
-      "--output-format=dot",
-      "--ignore=CVS",
-      "--output=uml_output"
-    ],
     "[html]": {
       "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
@@ -239,6 +234,7 @@
           "./gradlew clean build -x test > '/Users/carlosmorales/IdeaProjects/stuff/workspace_temp/clean_build_no_test.log'"
         ],
         "group": "build",
+        "isBackground": true,
         "problemMatcher": [],
         "detail": "Runs the gradle clean build task and logs the output to folder/file.log"
       },
@@ -282,6 +278,33 @@
         "isBackground": true,
         "problemMatcher": [],
         "detail": "Deactivates the Python virtual environment"
+      },
+      {
+        "label": "pylint: whole project",
+        "type": "shell",
+        "command": ".venv/bin/pylint --max-positional-arguments=8 --max-args=10 --disable=W0212 --max-line-length=200 --msg-template \"{path}:{line}:{column}:{category}:{symbol} - {msg}\" py | sed 's/refactor/info/g'",
+        "windows": {
+          "command": ".venv/Scripts/pylint --max-positional-arguments=8 --max-args=10 --disable=W0212 --max-line-length=200 --msg-template \"{path}:{line}: {column}:{category}:{symbol} - {msg}\" py"
+        },
+        "presentation": {
+          "reveal": "never",
+          "panel": "shared"
+        },
+        "problemMatcher": {
+          "owner": "python",
+          "fileLocation": [
+            "relative",
+            "${workspaceFolder}"
+          ],
+          "pattern": {
+            "regexp": "^(.+):(\\d+):(\\d+):(\\w+):(.*)$",
+            "file": 1,
+            "line": 2,
+            "column": 3,
+            "severity": 4,
+            "message": 5
+          }
+        }
       }
     ]
   }
