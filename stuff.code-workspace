@@ -77,27 +77,22 @@
     "python.analysis.extraPaths": [
       "${workspaceFolder}"
     ],
-    "python.autoComplete.extraPaths": [
-      "${workspaceFolder}"
-    ],
     "python.analysis.include": [
       "${workspaceFolder}"
     ],
     "pylint.enabled": true,
     "pylint.importStrategy": "fromEnvironment",
-    "pylint.interpreter": [
-    ],
+    "pylint.interpreter": [],
     "pylint.path": [
       "${workspaceFolder}/.venv/bin/python3",
       "-m",
-      "pylint" 
+      "pylint"
     ],
     "pylint.cwd": "${workspaceFolder}",
     "pylint.args": [
       "--max-line-length=200",
       "--max-args=10",
-      "--max-positional-arguments=8",
-      "--load-plugins=py.util.custom_checkers"
+      "--max-positional-arguments=8"
     ],
     "files.exclude": {
       "**/IdeaProjects": true
