@@ -58,11 +58,13 @@
     ]
   },
   "settings": {
+    "python.envFile": "${workspaceFolder}/.env",
     "python.terminal.activateEnvironment": true,
     "mypy-type-checker.reportingScope": "workspace",
     "mypy-type-checker.importStrategy": "fromEnvironment",
     "mypy-type-checker.args": [
-      "--python-executable=.venv/bin/python3"
+      "--python-executable=.venv/bin/python3",
+      "--disable-error-code=import-untyped"
     ],
     "mypy-type-checker.path": [
       ".venv/bin/mypy"
@@ -70,16 +72,32 @@
     "mypy-type-checker.interpreter": [
       ".venv/bin/python3"
     ],
-    //"mypy-type-checker.args": ["--disable-error-code=[assignment, import-not-found]"],
     //"mypy-type-checker.args": ["--disable-error-code=import-not-found", "--disable-error-code=assignment", "--disable-error-code=import-untyped"],
-    "python.defaultInterpreterPath": ".venv/bin/python3",
+    "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python3",
+    "python.analysis.extraPaths": [
+      "${workspaceFolder}"
+    ],
+    "python.autoComplete.extraPaths": [
+      "${workspaceFolder}"
+    ],
+    "python.analysis.include": [
+      "${workspaceFolder}"
+    ],
     "pylint.enabled": true,
-    "pylint.cwd": "${workspaceFolder}/py",
+    "pylint.importStrategy": "fromEnvironment",
+    "pylint.interpreter": [
+    ],
+    "pylint.path": [
+      "${workspaceFolder}/.venv/bin/python3",
+      "-m",
+      "pylint" 
+    ],
+    "pylint.cwd": "${workspaceFolder}",
     "pylint.args": [
       "--max-line-length=200",
-      "--disable=W0212",
       "--max-args=10",
-      "--max-positional-arguments=8"
+      "--max-positional-arguments=8",
+      "--load-plugins=py.util.custom_checkers"
     ],
     "files.exclude": {
       "**/IdeaProjects": true
@@ -92,11 +110,24 @@
     },
     "terminal.integrated.profiles.osx": {
       "zsh": {
-        "path": "zsh"
+        "path": "zsh",
+        "env": {
+          "PYTHONPATH": "${workspaceFolder}",
+        }
       },
       "bash": {
         "path": "/opt/homebrew/bin/bash",
-        "args": []
+        "args": [],
+        "env": {
+          "PYTHONPATH": "${workspaceFolder}",
+        }
+      },
+      "pwsh": {
+        "path": "pwsh",
+        "args": [],
+        "env": {
+          "PYTHONPATH": "${workspaceFolder}",
+        }
       }
     },
     "terminal.integrated.defaultProfile.osx": "zsh",
@@ -282,9 +313,15 @@
       {
         "label": "pylint: whole project",
         "type": "shell",
-        "command": ".venv/bin/pylint --max-positional-arguments=8 --max-args=10 --disable=W0212 --max-line-length=200 --msg-template \"{path}:{line}:{column}:{category}:{symbol} - {msg}\" py | sed 's/refactor/info/g'",
+        "command": ".venv/bin/pylint --max-positional-arguments=8 --max-args=10 --max-line-length=200 --msg-template \"{path}:{line}:{column}:{category}:{symbol} - {msg}\" py | sed 's/refactor/hint/g' | sed 's/convention/info/g'",
         "windows": {
-          "command": ".venv/Scripts/pylint --max-positional-arguments=8 --max-args=10 --disable=W0212 --max-line-length=200 --msg-template \"{path}:{line}: {column}:{category}:{symbol} - {msg}\" py"
+          "command": ".venv/Scripts/pylint --max-positional-arguments=8 --max-args=10 --max-line-length=200 --msg-template \"{path}:{line}: {column}:{category}:{symbol} - {msg}\" py",
+        },
+        "options": {
+          "cwd": "${workspaceFolder}",
+          "env": {
+            "PYTHONPATH": "${workspaceFolder}"
+          }
         },
         "presentation": {
           "reveal": "never",
