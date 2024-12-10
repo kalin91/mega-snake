@@ -38,11 +38,9 @@
           "zsh",
           "-l",
           "debug",
-          "msg",
-          "dsdadwh",
-          "xD",
-          "-t",
-          "t",
+          "gcloudLogin",
+          "u",
+          "queso"
         ]
       },
       {
@@ -92,7 +90,8 @@
     "pylint.args": [
       "--max-line-length=200",
       "--max-args=10",
-      "--max-positional-arguments=8"
+      "--max-positional-arguments=8",
+      "--disable=R0903"
     ],
     "files.exclude": {
       "**/IdeaProjects": true
@@ -107,21 +106,21 @@
       "zsh": {
         "path": "zsh",
         "env": {
-          "PYTHONPATH": "${workspaceFolder}",
+          "PYTHONPATH": "${workspaceFolder}"
         }
       },
       "bash": {
         "path": "/opt/homebrew/bin/bash",
         "args": [],
         "env": {
-          "PYTHONPATH": "${workspaceFolder}",
+          "PYTHONPATH": "${workspaceFolder}"
         }
       },
       "pwsh": {
         "path": "pwsh",
         "args": [],
         "env": {
-          "PYTHONPATH": "${workspaceFolder}",
+          "PYTHONPATH": "${workspaceFolder}"
         }
       }
     },
@@ -308,9 +307,9 @@
       {
         "label": "pylint: whole project",
         "type": "shell",
-        "command": ".venv/bin/pylint --max-positional-arguments=8 --max-args=10 --max-line-length=200 --msg-template \"{path}:{line}:{column}:{category}:{symbol} - {msg}\" py | sed 's/refactor/hint/g' | sed 's/convention/info/g'",
+        "command": ".venv/bin/pylint --disable=R0903 --max-positional-arguments=8 --max-args=10 --max-line-length=200 --msg-template \"{path}:{line}:{column}:{category}:{symbol} - {msg}\" py | sed 's/refactor/hint/g' | sed 's/convention/info/g'",
         "windows": {
-          "command": ".venv/Scripts/pylint --max-positional-arguments=8 --max-args=10 --max-line-length=200 --msg-template \"{path}:{line}: {column}:{category}:{symbol} - {msg}\" py",
+          "command": ".venv/Scripts/pylint --disable=R0903 --max-positional-arguments=8 --max-args=10 --max-line-length=200 --msg-template \"{path}:{line}: {column}:{category}:{symbol} - {msg}\" py"
         },
         "options": {
           "cwd": "${workspaceFolder}",
