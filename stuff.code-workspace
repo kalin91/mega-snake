@@ -38,9 +38,7 @@
           "zsh",
           "-l",
           "debug",
-          "gcloudLogin",
-          "u",
-          "queso"
+          "setJavaVersion"
         ]
       },
       {
@@ -56,21 +54,13 @@
     ]
   },
   "settings": {
+    "java.configuration.runtimes": [
+      {
+      }
+    ],
     "python.envFile": "${workspaceFolder}/.env",
+    "python.analysis.diagnosticMode": "workspace",
     "python.terminal.activateEnvironment": true,
-    "mypy-type-checker.reportingScope": "workspace",
-    "mypy-type-checker.importStrategy": "fromEnvironment",
-    "mypy-type-checker.args": [
-      "--python-executable=.venv/bin/python3",
-      "--disable-error-code=import-untyped"
-    ],
-    "mypy-type-checker.path": [
-      ".venv/bin/mypy"
-    ],
-    "mypy-type-checker.interpreter": [
-      ".venv/bin/python3"
-    ],
-    //"mypy-type-checker.args": ["--disable-error-code=import-not-found", "--disable-error-code=assignment", "--disable-error-code=import-untyped"],
     "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python3",
     "python.analysis.extraPaths": [
       "${workspaceFolder}"
@@ -78,21 +68,30 @@
     "python.analysis.include": [
       "${workspaceFolder}"
     ],
+    "mypy-type-checker.importStrategy": "fromEnvironment",
+    "mypy-type-checker.reportingScope": "workspace",
+    "mypy-type-checker.args": [],
+    "mypy-type-checker.path": [
+      "${workspaceFolder}/.venv/bin/python3",
+      "-m",
+      "mypy",
+    ],
+    "mypy-type-checker.cwd": "${workspaceFolder}",
+    "mypy-type-checker.interpreter": [
+      ".venv/bin/python3.13"
+    ],
     "pylint.enabled": true,
     "pylint.importStrategy": "fromEnvironment",
-    "pylint.interpreter": [],
+    "pylint.interpreter": [
+      ".venv/bin/python3.13"
+    ],
     "pylint.path": [
       "${workspaceFolder}/.venv/bin/python3",
       "-m",
       "pylint"
     ],
     "pylint.cwd": "${workspaceFolder}",
-    "pylint.args": [
-      "--max-line-length=200",
-      "--max-args=10",
-      "--max-positional-arguments=8",
-      "--disable=R0903"
-    ],
+    "pylint.args": [],
     "files.exclude": {
       "**/IdeaProjects": true
     },
@@ -232,8 +231,7 @@
         "autoScroll": true
       }
     ],
-    "editor.largeFileOptimizations": false,
-    "python.analysis.diagnosticMode": "workspace"
+    "editor.largeFileOptimizations": false
   },
   "tasks": {
     "version": "2.0.0",
@@ -307,9 +305,9 @@
       {
         "label": "pylint: whole project",
         "type": "shell",
-        "command": ".venv/bin/pylint --disable=R0903 --max-positional-arguments=8 --max-args=10 --max-line-length=200 --msg-template \"{path}:{line}:{column}:{category}:{symbol} - {msg}\" py | sed 's/refactor/hint/g' | sed 's/convention/info/g'",
+        "command": ".venv/bin/pylint --msg-template \"{path}:{line}:{column}:{category}:{symbol} - {msg}\" py | sed 's/refactor/hint/g' | sed 's/convention/info/g'",
         "windows": {
-          "command": ".venv/Scripts/pylint --disable=R0903 --max-positional-arguments=8 --max-args=10 --max-line-length=200 --msg-template \"{path}:{line}: {column}:{category}:{symbol} - {msg}\" py"
+          "command": ".venv/Scripts/pylint --msg-template \"{path}:{line}:{column}:{category}:{symbol} - {msg}\" py"
         },
         "options": {
           "cwd": "${workspaceFolder}",
@@ -327,6 +325,7 @@
             "relative",
             "${workspaceFolder}"
           ],
+          "source": "pylint-task",
           "pattern": {
             "regexp": "^(.+):(\\d+):(\\d+):(\\w+):(.*)$",
             "file": 1,
@@ -336,6 +335,55 @@
             "message": 5
           }
         }
+      },
+      {
+        "label": "mypy: whole project",
+        "type": "shell",
+        "command": ".venv/bin/mypy --show-column-numbers  --no-error-summary py | sed 's/note/hint/g' | sed 's/convention/info/g'",
+        "windows": {
+          "command": ".venv/Scripts/mypy --show-column-numbers  --no-error-summary py"
+        },
+        "options": {
+          "cwd": "${workspaceFolder}",
+          "env": {
+            "PYTHONPATH": "${workspaceFolder}"
+          }
+        },
+        "presentation": {
+          "reveal": "never",
+          "panel": "shared"
+        },
+        "problemMatcher": {
+          "owner": "python",
+          "fileLocation": [
+            "relative",
+            "${workspaceFolder}"
+          ],
+          "source": "mypy-task",
+          "pattern": {
+            "regexp": "^(.+):(\\d+):(\\d+):\\s*(\\w+):\\s*(.*)\\s*(\\[\\S+\\])?\\s*$",
+            "file": 1,
+            "line": 2,
+            "column": 3,
+            "severity": 4,
+            "message": 5,
+            "code": 6
+          }
+        }
+      },
+      {
+        "label": "Python quality code analysis",
+        "type": "shell",
+        "dependsOn": [
+          "pylint: whole project",
+          "mypy: whole project"
+        ],
+        "problemMatcher": [],
+        "group": {
+          "kind": "build",
+          "isDefault": true
+        },
+        "detail": "Runs pylint and mypy on the whole project"
       }
     ]
   }
