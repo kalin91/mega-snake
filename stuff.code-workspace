@@ -54,10 +54,6 @@
     ]
   },
   "settings": {
-    "java.configuration.runtimes": [
-      {
-      }
-    ],
     "python.envFile": "${workspaceFolder}/.env",
     "python.analysis.diagnosticMode": "workspace",
     "python.terminal.activateEnvironment": true,
@@ -74,11 +70,16 @@
     "mypy-type-checker.path": [
       "${workspaceFolder}/.venv/bin/python3",
       "-m",
-      "mypy",
+      "mypy"
     ],
     "mypy-type-checker.cwd": "${workspaceFolder}",
     "mypy-type-checker.interpreter": [
       ".venv/bin/python3.13"
+    ],
+    "mypy-type-checker.ignorePatterns": [
+      "**/site-packages/**/*.py",
+      ".vscode/*.py",
+      "/**/"
     ],
     "pylint.enabled": true,
     "pylint.importStrategy": "fromEnvironment",
@@ -89,6 +90,11 @@
       "${workspaceFolder}/.venv/bin/python3",
       "-m",
       "pylint"
+    ],
+    "pylint.ignorePatterns": [
+      "**/site-packages/**/*.py",
+      ".vscode/*.py",
+      "/**/"
     ],
     "pylint.cwd": "${workspaceFolder}",
     "pylint.args": [],
