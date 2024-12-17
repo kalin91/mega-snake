@@ -38,7 +38,7 @@
           "zsh",
           "-l",
           "debug",
-          "setJavaVersion"
+          "setGradleVersion"
         ]
       },
       {
