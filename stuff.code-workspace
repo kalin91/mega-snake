@@ -24,17 +24,21 @@
       {
         "name": "Python Debugger: Setup Module",
         "preLaunchTask": "Activate Python Virtual Environment",
+        "postDebugTask": "Deactivate Python Virtual Environment",
         "type": "debugpy",
         "env": {
-          "PYTHONPATH": "py",
+          "PYTHONPATH": "${workspaceFolder}",
           "WS_TEMP": "${workspaceFolder}/workspace_temp"
         },
+        "console": "integratedTerminal",
         "request": "launch",
         "module": "py",
         "args": [
+          "--shell",
+          "zsh",
           "-l",
-          "DEBUG",
-          "remoteBranchesCleanUp"
+          "debug",
+          "setGradleVersion"
         ]
       },
       {
@@ -50,21 +54,50 @@
     ]
   },
   "settings": {
-    "mypy-type-checker.reportingScope": "workspace",
+    "python.envFile": "${workspaceFolder}/.env",
+    "python.analysis.diagnosticMode": "workspace",
+    "python.terminal.activateEnvironment": true,
+    "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python3",
+    "python.analysis.extraPaths": [
+      "${workspaceFolder}"
+    ],
+    "python.analysis.include": [
+      "${workspaceFolder}"
+    ],
     "mypy-type-checker.importStrategy": "fromEnvironment",
-    "mypy-type-checker.args": [
-      "--python-executable=.venv/bin/python3"
-    ],
+    "mypy-type-checker.reportingScope": "workspace",
+    "mypy-type-checker.args": [],
     "mypy-type-checker.path": [
-      ".venv/bin/mypy"
+      "${workspaceFolder}/.venv/bin/python3",
+      "-m",
+      "mypy"
     ],
+    "mypy-type-checker.cwd": "${workspaceFolder}",
     "mypy-type-checker.interpreter": [
-      ".venv/bin/python3"
+      ".venv/bin/python3.13"
     ],
-    //"mypy-type-checker.args": ["--disable-error-code=[assignment, import-not-found]"],
-    //"mypy-type-checker.args": ["--disable-error-code=import-not-found", "--disable-error-code=assignment", "--disable-error-code=import-untyped"],
-    "python.defaultInterpreterPath": ".venv/bin/python3",
+    "mypy-type-checker.ignorePatterns": [
+      "**/site-packages/**/*.py",
+      ".vscode/*.py",
+      "/**/"
+    ],
     "pylint.enabled": true,
+    "pylint.importStrategy": "fromEnvironment",
+    "pylint.interpreter": [
+      ".venv/bin/python3.13"
+    ],
+    "pylint.path": [
+      "${workspaceFolder}/.venv/bin/python3",
+      "-m",
+      "pylint"
+    ],
+    "pylint.ignorePatterns": [
+      "**/site-packages/**/*.py",
+      ".vscode/*.py",
+      "/**/"
+    ],
+    "pylint.cwd": "${workspaceFolder}",
+    "pylint.args": [],
     "files.exclude": {
       "**/IdeaProjects": true
     },
@@ -78,10 +111,21 @@
       "zsh": {
         "path": "zsh",
         "env": {
-          "VER_GRADLE": "8",
-          "VER_JAVA": "11.0.22",
-          "CHECK_GCLOUD": "false",
-          "UNTRACK_PROPS": "false"
+          "PYTHONPATH": "${workspaceFolder}"
+        }
+      },
+      "bash": {
+        "path": "/opt/homebrew/bin/bash",
+        "args": [],
+        "env": {
+          "PYTHONPATH": "${workspaceFolder}"
+        }
+      },
+      "pwsh": {
+        "path": "pwsh",
+        "args": [],
+        "env": {
+          "PYTHONPATH": "${workspaceFolder}"
         }
       }
     },
@@ -112,16 +156,6 @@
     "markdownlint.config": {
       "MD033": false
     },
-    "pylint.args": [
-      "--max-line-length=200",
-      "--enable=E1101",
-      "--load-plugins=pylint.extensions.mccabe,pyreverse",
-      "--extension-pkg-whitelist=typing",
-      "--generated-members=typing.*",
-      "--output-format=dot",
-      "--ignore=CVS",
-      "--output=uml_output"
-    ],
     "[html]": {
       "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
@@ -203,8 +237,7 @@
         "autoScroll": true
       }
     ],
-    "editor.largeFileOptimizations": false,
-    "python.analysis.diagnosticMode": "workspace"
+    "editor.largeFileOptimizations": false
   },
   "tasks": {
     "version": "2.0.0",
@@ -212,7 +245,7 @@
       {
         "label": "Activate Python Virtual Environment",
         "type": "shell",
-        "command": "bash",
+        "command": "zsh",
         "args": [
           "-c",
           "source /Users/carlosmorales/IdeaProjects/stuff/.venv/bin/activate"
@@ -224,12 +257,13 @@
       {
         "label": "Gradle Clean Build No Tests",
         "type": "shell",
-        "command": "bash",
+        "command": "zsh",
         "args": [
           "-c",
           "./gradlew clean build -x test > '/Users/carlosmorales/IdeaProjects/stuff/workspace_temp/clean_build_no_test.log'"
         ],
         "group": "build",
+        "isBackground": true,
         "problemMatcher": [],
         "detail": "Runs the gradle clean build task and logs the output to folder/file.log"
       },
@@ -260,6 +294,102 @@
           "isDefault": true
         },
         "detail": "Runs the Java app with debugger and redirects output to java.log"
+      },
+      {
+        "label": "Deactivate Python Virtual Environment",
+        "type": "shell",
+        "command": "zsh",
+        "args": [
+          "-c",
+          "deactivate; exit"
+        ],
+        "group": "build",
+        "isBackground": true,
+        "problemMatcher": [],
+        "detail": "Deactivates the Python virtual environment"
+      },
+      {
+        "label": "pylint: whole project",
+        "type": "shell",
+        "command": ".venv/bin/pylint --msg-template \"{path}:{line}:{column}:{category}:{symbol} - {msg}\" py | sed 's/refactor/hint/g' | sed 's/convention/info/g'",
+        "windows": {
+          "command": ".venv/Scripts/pylint --msg-template \"{path}:{line}:{column}:{category}:{symbol} - {msg}\" py"
+        },
+        "options": {
+          "cwd": "${workspaceFolder}",
+          "env": {
+            "PYTHONPATH": "${workspaceFolder}"
+          }
+        },
+        "presentation": {
+          "reveal": "never",
+          "panel": "shared"
+        },
+        "problemMatcher": {
+          "owner": "python",
+          "fileLocation": [
+            "relative",
+            "${workspaceFolder}"
+          ],
+          "source": "pylint-task",
+          "pattern": {
+            "regexp": "^(.+):(\\d+):(\\d+):(\\w+):(.*)$",
+            "file": 1,
+            "line": 2,
+            "column": 3,
+            "severity": 4,
+            "message": 5
+          }
+        }
+      },
+      {
+        "label": "mypy: whole project",
+        "type": "shell",
+        "command": ".venv/bin/mypy --show-column-numbers  --no-error-summary py | sed 's/note/hint/g' | sed 's/convention/info/g'",
+        "windows": {
+          "command": ".venv/Scripts/mypy --show-column-numbers  --no-error-summary py"
+        },
+        "options": {
+          "cwd": "${workspaceFolder}",
+          "env": {
+            "PYTHONPATH": "${workspaceFolder}"
+          }
+        },
+        "presentation": {
+          "reveal": "never",
+          "panel": "shared"
+        },
+        "problemMatcher": {
+          "owner": "python",
+          "fileLocation": [
+            "relative",
+            "${workspaceFolder}"
+          ],
+          "source": "mypy-task",
+          "pattern": {
+            "regexp": "^(.+):(\\d+):(\\d+):\\s*(\\w+):\\s*(.*)\\s*(\\[\\S+\\])?\\s*$",
+            "file": 1,
+            "line": 2,
+            "column": 3,
+            "severity": 4,
+            "message": 5,
+            "code": 6
+          }
+        }
+      },
+      {
+        "label": "Python quality code analysis",
+        "type": "shell",
+        "dependsOn": [
+          "pylint: whole project",
+          "mypy: whole project"
+        ],
+        "problemMatcher": [],
+        "group": {
+          "kind": "build",
+          "isDefault": true
+        },
+        "detail": "Runs pylint and mypy on the whole project"
       }
     ]
   }
