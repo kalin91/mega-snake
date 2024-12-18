@@ -122,7 +122,7 @@
         }
       },
       "pwsh": {
-        "path": "pwsh",
+        "path": "/opt/homebrew/bin/pwsh",
         "args": [],
         "env": {
           "PYTHONPATH": "${workspaceFolder}"
