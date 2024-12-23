@@ -38,7 +38,7 @@
           "zsh",
           "-l",
           "debug",
-          "parseJsonLogs",
+          "createRelease", "a", "l"
         ]
       },
       {
