@@ -38,7 +38,8 @@
           "zsh",
           "-l",
           "debug",
-          "createRelease", "a", "l"
+          "expiredCertsJks",
+          "/Users/carlosmorales/IdeaProjects/ocm_pd_totf-api_store-information-api/workspace_temp/certs/tls-truststore.jks"
         ]
       },
       {
@@ -237,7 +238,52 @@
         "autoScroll": true
       }
     ],
-    "editor.largeFileOptimizations": false
+    "editor.largeFileOptimizations": false,
+    "java.configuration.runtimes": [
+      {
+        "name": "JavaSE-21",
+        "path": "/Library/Java/JavaVirtualMachines/temurin-21.jdk/Contents/Home",
+        "default": true
+      },
+      {
+        "name": "JavaSE-21",
+        "path": "/Users/carlosmorales/Library/Java/JavaVirtualMachines/openjdk-21.0.2/Contents/Home",
+        "default": false
+      },
+      {
+        "name": "JavaSE-19",
+        "path": "/Users/carlosmorales/Library/Java/JavaVirtualMachines/temurin-19.0.2/Contents/Home",
+        "default": false
+      },
+      {
+        "name": "JavaSE-17",
+        "path": "/Library/Java/JavaVirtualMachines/temurin-17.jdk/Contents/Home",
+        "default": false
+      },
+      {
+        "name": "JavaSE-17",
+        "path": "/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home",
+        "default": false
+      },
+      {
+        "name": "JavaSE-11",
+        "path": "/Users/carlosmorales/Library/Java/JavaVirtualMachines/temurin-11.0.22/Contents/Home",
+        "default": false
+      },
+      {
+        "name": "JavaSE-11",
+        "path": "/Library/Java/JavaVirtualMachines/jdk-11.0.2.jdk/Contents/Home",
+        "default": false
+      },
+      {
+        "name": "JavaSE-1.8",
+        "path": "/Users/carlosmorales/Library/Java/JavaVirtualMachines/corretto-1.8.0_402/Contents/Home",
+        "default": false
+      }
+    ],
+    "terminal.integrated.env.osx": {
+      "JAVA_HOME": "/Library/Java/JavaVirtualMachines/temurin-21.jdk/Contents/Home"
+    }
   },
   "tasks": {
     "version": "2.0.0",
