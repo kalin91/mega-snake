@@ -38,8 +38,7 @@
           "zsh",
           "-l",
           "debug",
-          "expiredCertsJks",
-          "/Users/carlosmorales/IdeaProjects/ocm_pd_totf-api_store-information-api/workspace_temp/certs/tls-truststore.jks"
+          "createWorkingEnv",
         ]
       },
       {
