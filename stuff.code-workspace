@@ -23,14 +23,10 @@
       },
       {
         "name": "Python Debugger: Setup Module",
-        "preLaunchTask": "Activate Python Virtual Environment",
-        "postDebugTask": "Deactivate Python Virtual Environment",
         "type": "debugpy",
-        "env": {
-          "PYTHONPATH": "${workspaceFolder}",
-          "WS_TEMP": "${workspaceFolder}/workspace_temp"
-        },
+        "env": {},
         "console": "integratedTerminal",
+        "python": "${workspaceFolder}/.venv/bin/python3.13",
         "request": "launch",
         "module": "py",
         "args": [
@@ -38,7 +34,7 @@
           "zsh",
           "-l",
           "debug",
-          "createWorkingEnv",
+          "createWorkingEnv"
         ]
       },
       {
@@ -146,7 +142,6 @@
         "other": "off"
       }
     },
-    "git-blame.gitWebUrl": "https://github.com/one-thd/ocm_pd_totf-api_product-information-api/tree/$ID",
     "java.test.config": {
       "classPaths": [
         "/Users/carlosmorales/IdeaProjects/ocm_pd_totf-api_product-information-api/src/verify/java/com/homedepot/functionalTests"
