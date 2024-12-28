@@ -6,6 +6,26 @@
     }
   ],
   "launch": {
+    "inputs": [
+      {
+        "id": "timestampFile",
+        "type": "command",
+        "command": "workbench.action.tasks.runTask",
+        "args": {
+          "task": "Timestamp"
+        }
+      },
+      {
+        "id": "dependsOnTask",
+        "type": "pickString",
+        "options": [
+          "Task A",
+          "Task B"
+        ],
+        "default": "Task A",
+        "description": "Choose the dependent task"
+      }
+    ],
     "version": "0.2.0",
     "configurations": [
       {
@@ -46,6 +66,45 @@
         "request": "launch",
         "module": "${fileDirnameBasename}",
         "args": []
+      },
+      {
+        "name": "JAVA DEBUG (Attach)",
+        "type": "java",
+        "request": "attach",
+        "port": 5005,
+        "hostName": "localhost",
+        "projectName": "stuff"
+      },
+      {
+        "name": "PYTHON DEBUG (File)",
+        "type": "debugpy",
+        "request": "launch",
+        "program": "${file}"
+      },
+      {
+        "name": "PYTHON DEBUG (Module)",
+        "type": "debugpy",
+        "request": "launch",
+        "env": {
+          "PYTHONPATH": "${fileDirnameBasename}"
+        },
+        "module": "${fileDirnameBasename}"
+      },
+      {
+        "name": "PYTHON DEBUG (Snake)",
+        "type": "debugpy",
+        "request": "launch",
+        "args": [
+          "--shell",
+          "zsh",
+          "-l",
+          "debug",
+          "msg",
+          "hello world!"
+        ],
+        "module": "py",
+        "python": "/Users/carlosmorales/IdeaProjects/stuff/.venv/bin/python3.13",
+        "console": "integratedTerminal"
       }
     ]
   },
@@ -198,6 +257,18 @@
       {
         "label": "Created By Me",
         "query": "is:open author:${user}"
+      },
+      {
+        "label": "Waiting for My Review",
+        "query": "is:open review-requested:${user}"
+      },
+      {
+        "label": "Assigned to Me",
+        "query": "is:open assignee:${user}"
+      },
+      {
+        "label": "Created by Me",
+        "query": "is:open author:${user}"
       }
     ],
     "jarFilePath": "build/libs/*.jar",
@@ -229,6 +300,11 @@
       {
         "title": "SETUP_ENVIRONMENT_LOG",
         "pattern": "/Users/carlosmorales/IdeaProjects/stuff/workspace_temp/logs/setup_environment_*.log",
+        "autoScroll": true
+      },
+      {
+        "title": "PYTHON SNAKE LOG",
+        "pattern": "/Users/carlosmorales/IdeaProjects/stuff/workspace_temp/logs/python_snake_*.log",
         "autoScroll": true
       }
     ],
@@ -276,8 +352,13 @@
       }
     ],
     "terminal.integrated.env.osx": {
-      "JAVA_HOME": "/Library/Java/JavaVirtualMachines/temurin-21.jdk/Contents/Home"
-    }
+      "JAVA_HOME": "/Library/Java/JavaVirtualMachines/temurin-21.jdk/Contents/Home",
+      "GRADLE_HOME": "/opt/homebrew/Cellar/gradle/8.11/libexec"
+    },
+    "java.import.gradle.home": "/opt/homebrew/Cellar/gradle/8.11/libexec",
+    "java.import.gradle.version": "8.11",
+    "java.import.gradle.wrapper.enabled": false,
+    "git-blame.gitWebUrl": "https://github.com/kalin91/unix-scripts/tree/$ID"
   },
   "tasks": {
     "version": "2.0.0",
