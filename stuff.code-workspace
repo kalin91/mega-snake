@@ -24,6 +24,15 @@
         ],
         "default": "Task A",
         "description": "Choose the dependent task"
+      },
+      {
+        "id": "todayTimestamp",
+        "type": "command",
+        "command": "shellCommand.execute",
+        "args": {
+          "command": "python3 -c 'from datetime import datetime; print(datetime.now().strftime(\"%Y-%m-%d\"));'",
+          "useSingleResult": true
+        }
       }
     ],
     "version": "0.2.0",
@@ -54,8 +63,7 @@
           "zsh",
           "-l",
           "debug",
-          "createWorkingEnv"
-        ]
+          "gl", "b","quw"        ]
       },
       {
         "name": "Python Debugger: Python Module",
@@ -358,7 +366,10 @@
     "java.import.gradle.home": "/opt/homebrew/Cellar/gradle/8.11/libexec",
     "java.import.gradle.version": "8.11",
     "java.import.gradle.wrapper.enabled": false,
-    "git-blame.gitWebUrl": "https://github.com/kalin91/unix-scripts/tree/$ID"
+    "git-blame.gitWebUrl": "https://github.com/kalin91/unix-scripts/tree/$ID",
+    "snake.java.remoteDebug.port": 5005,
+    "snake.java.remoteDebug.profile": "dev",
+    "snake.java.remoteDebug.jar": "build/libs/*.jar"
   },
   "tasks": {
     "version": "2.0.0",
@@ -511,7 +522,148 @@
           "isDefault": true
         },
         "detail": "Runs pylint and mypy on the whole project"
+      },
+      {
+        "label": "No Build",
+        "hide": true,
+        "detail": "No build task",
+        "problemMatcher": [],
+        "type": "shell",
+        "command": "echo",
+        "args": [
+          "Skipping Gradle Building"
+        ]
+      },
+      {
+        "label": "Gradle Build No Test",
+        "hide": true,
+        "detail": "Run a gradle clean build without tests",
+        "problemMatcher": [],
+        "type": "shell",
+        "command": "gradle",
+        "args": [
+          "clean",
+          "build",
+          "-x",
+          "test",
+          ">",
+          "'/Users/carlosmorales/IdeaProjects/stuff/workspace_temp/logs/clean_build_no_test_${input:todayTimestamp}.log'",
+          "2>&1"
+        ],
+        "group": "build"
+      },
+      {
+        "label": "Gradle Build",
+        "hide": true,
+        "detail": "Run a gradle clean build",
+        "problemMatcher": [],
+        "type": "shell",
+        "command": "gradle",
+        "args": [
+          "clean",
+          "build",
+          ">",
+          "'/Users/carlosmorales/IdeaProjects/stuff/workspace_temp/logs/clean_build_${input:todayTimestamp}.log'",
+          "2>&1"
+        ],
+        "group": "test"
+      },
+      {
+        "label": "Java Remote Debug Start",
+        "hide": true,
+        "detail": "Start a Java Remote Debug execution",
+        "problemMatcher": [],
+        "type": "shell",
+        "command": "java",
+        "args": [
+          "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=${config:snake.java.remoteDebug.port}",
+          "-Dspring.profiles.active=${config:snake.java.remoteDebug.profile}",
+          "-jar",
+          "${config:snake.java.remoteDebug.jar}",
+          ">",
+          "'/Users/carlosmorales/IdeaProjects/stuff/workspace_temp/logs/java_debug_${input:todayTimestamp}.log'",
+          "2>&1"
+        ],
+        "isBackground": false
+      },
+      {
+        "label": "1 - Java-debug: Gradle Build No Test",
+        "hide": false,
+        "detail": "Debug java while building gradle without tests",
+        "problemMatcher": [],
+        "dependsOn": [
+          "Gradle Build No Test",
+          "Java Remote Debug Start"
+        ],
+        "dependsOrder": "sequence"
+      },
+      {
+        "label": "2 - Java-debug: No Build",
+        "hide": false,
+        "detail": "Debug java without building gradle",
+        "problemMatcher": [],
+        "dependsOn": [
+          "No Build",
+          "Java Remote Debug Start"
+        ],
+        "dependsOrder": "sequence"
+      },
+      {
+        "label": "3 - Java-debug: Gradle Build",
+        "hide": false,
+        "detail": "Debug java while building gradle",
+        "problemMatcher": [],
+        "dependsOn": [
+          "Gradle Build",
+          "Java Remote Debug Start"
+        ],
+        "dependsOrder": "sequence"
+      },
+      {
+        "label": "Run Java Debug",
+        "hide": false,
+        "detail": "Debug java application",
+        "problemMatcher": [],
+        "type": "process",
+        "command": "${input:selectBuildTask}"
       }
+    ],
+    "inputs": [
+      {
+        "id": "todayTimestamp",
+        "type": "command",
+        "command": "shellCommand.execute",
+        "args": {
+          "command": "python3 -c 'from datetime import datetime; print(datetime.now().strftime(\"%Y-%m-%d\"));'",
+          "useSingleResult": true
+        }
+      },
+      {
+        "id": "selectBuildTask",
+        "type": "command",
+        "command": "workbench.action.tasks.runTask",
+        "args": {
+          "task": "Java-debug: "
+        }
+      }
+    ]
+  },
+  "extensions": {
+    "recommendations": [
+      "augustocdias.tasks-shell-input",
+      "berublan.vscode-log-viewer",
+      "bradzacher.vscode-copy-filename",
+      "github.vscode-github-actions",
+      "github.vscode-pull-request-github",
+      "graphql.vscode-graphql-syntax",
+      "graphql.vscode-graphql",
+      "letmaik.git-tree-compare",
+      "mhutchie.git-graph",
+      "natqe.reload",
+      "sandcastle.vscode-open",
+      "solomonkinard.git-blame",
+      "vscjava.vscode-gradle",
+      "vscjava.vscode-java-pack"
     ]
   }
 }
