@@ -63,7 +63,8 @@
           "zsh",
           "-l",
           "debug",
-          "gl", "b","quw"        ]
+          "dt", "-d"
+        ]
       },
       {
         "name": "Python Debugger: Python Module",
