@@ -63,7 +63,9 @@
           "zsh",
           "-l",
           "debug",
-          "dt", "-d"
+          //"dt", "-d"
+          //"-h"
+          "msg", "hello world!"
         ]
       },
       {
