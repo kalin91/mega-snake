@@ -123,7 +123,6 @@
     "python.envFile": "${workspaceFolder}/.env",
     "python.analysis.diagnosticMode": "workspace",
     "python.terminal.activateEnvironment": true,
-    "python.defaultInterpreterPath": "${workspaceFolder}/${config:python.binPath}/python3",
     "python.analysis.extraPaths": [
       "${workspaceFolder}"
     ],
