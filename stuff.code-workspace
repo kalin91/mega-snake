@@ -57,7 +57,7 @@
         "console": "integratedTerminal",
         "python": "${config:python.defaultInterpreterPath}",
         "request": "launch",
-        "module": "py",
+        "module": "codename_snake",
         "args": [
           "--shell",
           "zsh",
@@ -91,6 +91,17 @@
         "type": "debugpy",
         "request": "launch",
         "program": "${file}"
+      },
+      {
+        "name": "PYTHON TEST DEBUG (File)",
+        "type": "debugpy",
+        "request": "launch",
+        "program": "${config:python.binPath}/pytest",
+        "python": "${config:python.defaultInterpreterPath}",
+        "args": [
+          "${file}",
+        ],
+        "console": "integratedTerminal"
       },
       {
         "name": "PYTHON DEBUG (Module)",
