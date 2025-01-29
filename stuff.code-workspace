@@ -64,8 +64,8 @@
           "-l",
           "debug",
           //"dt", "-d"
-          //"-h"
-          "msg", "hello world!"
+          "-h"
+          //"msg", "hello world!"
         ]
       },
       {
@@ -124,7 +124,7 @@
           "msg",
           "hello world!"
         ],
-        "module": "py",
+        "module": "codename_snake",
         "python": "${config:python.defaultInterpreterPath}",
         "console": "integratedTerminal"
       }
@@ -416,9 +416,9 @@
       {
         "label": "pylint: whole project",
         "type": "shell",
-        "command": "${config:python.binPath}/pylint --msg-template \"{path}:{line}:{column}:{category}:{symbol} - {msg}\" py | sed 's/refactor/hint/g' | sed 's/convention/info/g'",
+        "command": "${config:python.binPath}/pylint --msg-template \"{path}:{line}:{column}:{category}:{symbol} - {msg}\" codename_snake | sed 's/refactor/hint/g' | sed 's/convention/info/g'",
         "windows": {
-          "command": ".venv/Scripts/pylint --msg-template \"{path}:{line}:{column}:{category}:{symbol} - {msg}\" py"
+          "command": "${config:python.binPath}/pylint --msg-template \"{path}:{line}:{column}:{category}:{symbol} - {msg}\" codename_snake"
         },
         "options": {
           "cwd": "${workspaceFolder}",
@@ -450,9 +450,9 @@
       {
         "label": "mypy: whole project",
         "type": "shell",
-        "command": "${config:python.binPath}/mypy --show-column-numbers  --no-error-summary py | sed 's/note/hint/g' | sed 's/convention/info/g'",
+        "command": "${config:python.binPath}/mypy --show-column-numbers  --no-error-summary codename_snake | sed 's/note/hint/g' | sed 's/convention/info/g'",
         "windows": {
-          "command": ".venv/Scripts/mypy --show-column-numbers  --no-error-summary py"
+          "command": "${config:python.binPath}/mypy --show-column-numbers  --no-error-summary codename_snake"
         },
         "options": {
           "cwd": "${workspaceFolder}",
