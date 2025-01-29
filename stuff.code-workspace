@@ -131,6 +131,10 @@
     ]
   },
   "settings": {
+    "black-formatter.args": [
+      "--line-length",
+      "119"
+  ],
     "python.envFile": "${workspaceFolder}/.env",
     "python.analysis.diagnosticMode": "workspace",
     "python.terminal.activateEnvironment": true,
