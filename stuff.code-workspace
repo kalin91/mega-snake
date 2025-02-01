@@ -361,9 +361,9 @@
     ],
     "terminal.integrated.env.osx": {
       "JAVA_HOME": "/Users/carlosmorales/Library/Java/JavaVirtualMachines/openjdk-21.0.2/Contents/Home",
-      "GRADLE_HOME": "/opt/homebrew/Cellar/gradle@6/6.9.4/libexec"
+      "GRADLE_HOME": "/opt/homebrew/Cellar/gradle@8.4/8.4/libexec"
     },
-    "java.import.gradle.home": "/opt/homebrew/Cellar/gradle@6/6.9.4/libexec",
+    "java.import.gradle.home": "/opt/homebrew/Cellar/gradle@8.4/8.4/libexec",
     "java.import.gradle.version": "8.11",
     "java.import.gradle.wrapper.enabled": false,
     "git-blame.gitWebUrl": "https://github.com/kalin91/unix-scripts/tree/$ID",
@@ -419,9 +419,9 @@
       {
         "label": "pylint: whole project",
         "type": "shell",
-        "command": "${config:python.binPath}/pylint --msg-template \"{path}:{line}:{column}:{category}:{symbol} - {msg}\" codename_snake | sed 's/refactor/hint/g' | sed 's/convention/info/g'",
+        "command": "${config:python.binPath}/pylint --msg-template \"{path}:{line}:{column}:{category}:{symbol} - {msg}\" src/codename_snake | sed 's/refactor/hint/g' | sed 's/convention/info/g'",
         "windows": {
-          "command": "${config:python.binPath}/pylint --msg-template \"{path}:{line}:{column}:{category}:{symbol} - {msg}\" codename_snake"
+          "command": "${config:python.binPath}/pylint --msg-template \"{path}:{line}:{column}:{category}:{symbol} - {msg}\" src/codename_snake"
         },
         "options": {
           "cwd": "${workspaceFolder}",
@@ -453,9 +453,9 @@
       {
         "label": "mypy: whole project",
         "type": "shell",
-        "command": "${config:python.binPath}/mypy --show-column-numbers  --no-error-summary codename_snake | sed 's/note/hint/g' | sed 's/convention/info/g'",
+        "command": "${config:python.binPath}/mypy --show-column-numbers  --no-error-summary src/codename_snake | sed 's/note/hint/g' | sed 's/convention/info/g'",
         "windows": {
-          "command": "${config:python.binPath}/mypy --show-column-numbers  --no-error-summary codename_snake"
+          "command": "${config:python.binPath}/mypy --show-column-numbers  --no-error-summary src/codename_snake"
         },
         "options": {
           "cwd": "${workspaceFolder}",
