@@ -161,6 +161,21 @@
     ],
     "pylint.cwd": "${workspaceFolder}",
     "pylint.args": [],
+    "flake8.severity": {
+      "convention": "Information",
+      "error": "Error",
+      "fatal": "Error",
+      "refactor": "Hint",
+      "warning": "Warning",
+      "info": "Information"
+    },
+    "flake8.importStrategy": "fromEnvironment",
+    "flake8.ignorePatterns": [
+      "**/site-packages/**/*.py",
+      ".vscode/*.py",
+      "/**/",
+      "**/pylint/**"
+    ],
     "files.exclude": {
       "**/IdeaProjects": true
     },
@@ -451,6 +466,40 @@
         }
       },
       {
+        "label": "flake8: whole project",
+        "type": "shell",
+        "command": "${config:python.binPath}/flake8 --format='%(path)s:%(row)s:%(col)s:info:%(code)s — %(text)s' src/codename_snake",
+        "windows": {
+          "command": "${config:python.binPath}/flake8 --format='%(path)s:%(row)s:%(col)s:info:%(code)s — %(text)s' src/codename_snake"
+        },
+        "options": {
+          "cwd": "${workspaceFolder}",
+          "env": {
+            "PYTHONPATH": "${workspaceFolder}"
+          }
+        },
+        "presentation": {
+          "reveal": "never",
+          "panel": "shared"
+        },
+        "problemMatcher": {
+          "owner": "python",
+          "fileLocation": [
+            "relative",
+            "${workspaceFolder}"
+          ],
+          "source": "flake8-task",
+          "pattern": {
+            "regexp": "^(.+):(\\d+):(\\d+):(\\w+):(.*)$",
+            "file": 1,
+            "line": 2,
+            "column": 3,
+            "severity": 4,
+            "message": 5
+          }
+        }
+      },
+      {
         "label": "mypy: whole project",
         "type": "shell",
         "command": "${config:python.binPath}/mypy --show-column-numbers  --no-error-summary src/codename_snake | sed 's/note/hint/g' | sed 's/convention/info/g'",
@@ -490,7 +539,8 @@
         "type": "shell",
         "dependsOn": [
           "pylint: whole project",
-          "mypy: whole project"
+          "mypy: whole project",
+          "flake8: whole project"
         ],
         "problemMatcher": [],
         "group": {
