@@ -170,12 +170,7 @@
       "info": "Information"
     },
     "flake8.importStrategy": "fromEnvironment",
-    "flake8.ignorePatterns": [
-      "**/site-packages/**/*.py",
-      ".vscode/*.py",
-      "/**/",
-      "**/pylint/**"
-    ],
+    "flake8.cwd": "${workspaceFolder}",
     "files.exclude": {
       "**/IdeaProjects": true
     },
