@@ -63,7 +63,7 @@
           "zsh",
           "-l",
           "debug",
-          "gradle",
+          "java",
           "-o"
         ]
       },
@@ -331,16 +331,16 @@
       {
         "name": "JavaSE-21",
         "path": "/Library/Java/JavaVirtualMachines/temurin-21.jdk/Contents/Home",
-        "default": false
-      },
-      {
-        "name": "JavaSE-21",
-        "path": "/Users/carlosmorales/Library/Java/JavaVirtualMachines/openjdk-21.0.2/Contents/Home",
         "default": true
       },
       {
+        "name": "JavaSE-21",
+        "path": "/Library/Java/JavaVirtualMachines/openjdk-21.0.2/Contents/Home",
+        "default": false
+      },
+      {
         "name": "JavaSE-19",
-        "path": "/Users/carlosmorales/Library/Java/JavaVirtualMachines/temurin-19.0.2/Contents/Home",
+        "path": "/Library/Java/JavaVirtualMachines/temurin-19.0.2/Contents/Home",
         "default": false
       },
       {
@@ -355,7 +355,7 @@
       },
       {
         "name": "JavaSE-11",
-        "path": "/Users/carlosmorales/Library/Java/JavaVirtualMachines/temurin-11.0.22/Contents/Home",
+        "path": "/Library/Java/JavaVirtualMachines/temurin-11.0.22/Contents/Home",
         "default": false
       },
       {
@@ -365,22 +365,22 @@
       },
       {
         "name": "JavaSE-1.8",
-        "path": "/Users/carlosmorales/Library/Java/JavaVirtualMachines/corretto-1.8.0_402/Contents/Home",
+        "path": "/Library/Java/JavaVirtualMachines/corretto-1.8.0_402/Contents/Home",
         "default": false
       }
     ],
     "terminal.integrated.env.osx": {
-      "JAVA_HOME": "/Users/carlosmorales/Library/Java/JavaVirtualMachines/openjdk-21.0.2/Contents/Home",
-      "GRADLE_HOME": "/opt/homebrew/Cellar/gradle@8.4/8.4/libexec"
+      "JAVA_HOME": "/Library/Java/JavaVirtualMachines/temurin-21.jdk/Contents/Home",
+      "GRADLE_HOME": "/opt/homebrew/Cellar/gradle@8.12.1/8.12.1/libexec"
     },
-    "java.import.gradle.home": "/opt/homebrew/Cellar/gradle@8.4/8.4/libexec",
+    "java.import.gradle.home": "/opt/homebrew/Cellar/gradle@8.12.1/8.12.1/libexec",
     "java.import.gradle.version": "8.11",
     "java.import.gradle.wrapper.enabled": false,
     "git-blame.gitWebUrl": "https://github.com/kalin91/unix-scripts/tree/$ID",
     "snake.java.remoteDebug.port": 5005,
     "snake.java.remoteDebug.profile": "dev",
     "snake.java.remoteDebug.jar": "build/libs/*.jar",
-    "java.import.gradle.java.home": "/Users/carlosmorales/Library/Java/JavaVirtualMachines/openjdk-21.0.2/Contents/Home"
+    "java.import.gradle.java.home": "/Library/Java/JavaVirtualMachines/temurin-21.jdk/Contents/Home"
   },
   "tasks": {
     "version": "2.0.0",
