@@ -261,6 +261,10 @@
     ],
     "githubPullRequests.queries": [
       {
+        "label": "Local Pull Request Branches",
+        "query": "default"
+      },
+      {
         "label": "My Closed PRs",
         "query": "is:closed author:${user}"
       },
@@ -287,6 +291,10 @@
       {
         "label": "Created by Me",
         "query": "is:open author:${user}"
+      },
+      {
+        "label": "All Open",
+        "query": "default"
       }
     ],
     "jarFilePath": "build/libs/*.jar",
