@@ -55,17 +55,16 @@
         "type": "debugpy",
         "env": {},
         "console": "integratedTerminal",
-        "python": "${workspaceFolder}/.venv/bin/python3.13",
+        "python": "${config:python.defaultInterpreterPath}",
         "request": "launch",
-        "module": "py",
+        "module": "codename_snake",
         "args": [
           "--shell",
           "zsh",
           "-l",
           "debug",
-          //"dt", "-d"
-          //"-h"
-          "msg", "hello world!"
+          "java",
+          "-o"
         ]
       },
       {
@@ -93,6 +92,17 @@
         "program": "${file}"
       },
       {
+        "name": "PYTHON TEST DEBUG (File)",
+        "type": "debugpy",
+        "request": "launch",
+        "program": "${config:python.binPath}/pytest",
+        "python": "${config:python.defaultInterpreterPath}",
+        "args": [
+          "${file}"
+        ],
+        "console": "integratedTerminal"
+      },
+      {
         "name": "PYTHON DEBUG (Module)",
         "type": "debugpy",
         "request": "launch",
@@ -113,17 +123,20 @@
           "msg",
           "hello world!"
         ],
-        "module": "py",
-        "python": "/Users/carlosmorales/IdeaProjects/stuff/.venv/bin/python3.13",
+        "module": "codename_snake",
+        "python": "${config:python.defaultInterpreterPath}",
         "console": "integratedTerminal"
       }
     ]
   },
   "settings": {
+    "black-formatter.args": [
+      "--line-length",
+      "119"
+    ],
     "python.envFile": "${workspaceFolder}/.env",
     "python.analysis.diagnosticMode": "workspace",
     "python.terminal.activateEnvironment": true,
-    "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python3",
     "python.analysis.extraPaths": [
       "${workspaceFolder}"
     ],
@@ -133,15 +146,7 @@
     "mypy-type-checker.importStrategy": "fromEnvironment",
     "mypy-type-checker.reportingScope": "workspace",
     "mypy-type-checker.args": [],
-    "mypy-type-checker.path": [
-      "${workspaceFolder}/.venv/bin/python3",
-      "-m",
-      "mypy"
-    ],
     "mypy-type-checker.cwd": "${workspaceFolder}",
-    "mypy-type-checker.interpreter": [
-      ".venv/bin/python3.13"
-    ],
     "mypy-type-checker.ignorePatterns": [
       "**/site-packages/**/*.py",
       ".vscode/*.py",
@@ -149,14 +154,6 @@
     ],
     "pylint.enabled": true,
     "pylint.importStrategy": "fromEnvironment",
-    "pylint.interpreter": [
-      ".venv/bin/python3.13"
-    ],
-    "pylint.path": [
-      "${workspaceFolder}/.venv/bin/python3",
-      "-m",
-      "pylint"
-    ],
     "pylint.ignorePatterns": [
       "**/site-packages/**/*.py",
       ".vscode/*.py",
@@ -164,6 +161,16 @@
     ],
     "pylint.cwd": "${workspaceFolder}",
     "pylint.args": [],
+    "flake8.severity": {
+      "convention": "Information",
+      "error": "Error",
+      "fatal": "Error",
+      "refactor": "Hint",
+      "warning": "Warning",
+      "info": "Information"
+    },
+    "flake8.importStrategy": "fromEnvironment",
+    "flake8.cwd": "${workspaceFolder}",
     "files.exclude": {
       "**/IdeaProjects": true
     },
@@ -254,6 +261,10 @@
     ],
     "githubPullRequests.queries": [
       {
+        "label": "Local Pull Request Branches",
+        "query": "default"
+      },
+      {
         "label": "My Closed PRs",
         "query": "is:closed author:${user}"
       },
@@ -280,6 +291,10 @@
       {
         "label": "Created by Me",
         "query": "is:open author:${user}"
+      },
+      {
+        "label": "All Open",
+        "query": "default"
       }
     ],
     "jarFilePath": "build/libs/*.jar",
@@ -328,12 +343,12 @@
       },
       {
         "name": "JavaSE-21",
-        "path": "/Users/carlosmorales/Library/Java/JavaVirtualMachines/openjdk-21.0.2/Contents/Home",
+        "path": "/Library/Java/JavaVirtualMachines/openjdk-21.0.2/Contents/Home",
         "default": false
       },
       {
         "name": "JavaSE-19",
-        "path": "/Users/carlosmorales/Library/Java/JavaVirtualMachines/temurin-19.0.2/Contents/Home",
+        "path": "/Library/Java/JavaVirtualMachines/temurin-19.0.2/Contents/Home",
         "default": false
       },
       {
@@ -348,7 +363,7 @@
       },
       {
         "name": "JavaSE-11",
-        "path": "/Users/carlosmorales/Library/Java/JavaVirtualMachines/temurin-11.0.22/Contents/Home",
+        "path": "/Library/Java/JavaVirtualMachines/temurin-11.0.22/Contents/Home",
         "default": false
       },
       {
@@ -358,37 +373,26 @@
       },
       {
         "name": "JavaSE-1.8",
-        "path": "/Users/carlosmorales/Library/Java/JavaVirtualMachines/corretto-1.8.0_402/Contents/Home",
+        "path": "/Library/Java/JavaVirtualMachines/corretto-1.8.0_402/Contents/Home",
         "default": false
       }
     ],
     "terminal.integrated.env.osx": {
       "JAVA_HOME": "/Library/Java/JavaVirtualMachines/temurin-21.jdk/Contents/Home",
-      "GRADLE_HOME": "/opt/homebrew/Cellar/gradle/8.11/libexec"
+      "GRADLE_HOME": "/opt/homebrew/Cellar/gradle@8.12.1/8.12.1/libexec"
     },
-    "java.import.gradle.home": "/opt/homebrew/Cellar/gradle/8.11/libexec",
+    "java.import.gradle.home": "/opt/homebrew/Cellar/gradle@8.12.1/8.12.1/libexec",
     "java.import.gradle.version": "8.11",
     "java.import.gradle.wrapper.enabled": false,
     "git-blame.gitWebUrl": "https://github.com/kalin91/unix-scripts/tree/$ID",
     "snake.java.remoteDebug.port": 5005,
     "snake.java.remoteDebug.profile": "dev",
-    "snake.java.remoteDebug.jar": "build/libs/*.jar"
+    "snake.java.remoteDebug.jar": "build/libs/*.jar",
+    "java.import.gradle.java.home": "/Library/Java/JavaVirtualMachines/temurin-21.jdk/Contents/Home"
   },
   "tasks": {
     "version": "2.0.0",
     "tasks": [
-      {
-        "label": "Activate Python Virtual Environment",
-        "type": "shell",
-        "command": "zsh",
-        "args": [
-          "-c",
-          "source /Users/carlosmorales/IdeaProjects/stuff/.venv/bin/activate"
-        ],
-        "group": "build",
-        "problemMatcher": [],
-        "detail": "Activates the Python virtual environment"
-      },
       {
         "label": "Gradle Clean Build No Tests",
         "type": "shell",
@@ -431,24 +435,11 @@
         "detail": "Runs the Java app with debugger and redirects output to java.log"
       },
       {
-        "label": "Deactivate Python Virtual Environment",
-        "type": "shell",
-        "command": "zsh",
-        "args": [
-          "-c",
-          "deactivate; exit"
-        ],
-        "group": "build",
-        "isBackground": true,
-        "problemMatcher": [],
-        "detail": "Deactivates the Python virtual environment"
-      },
-      {
         "label": "pylint: whole project",
         "type": "shell",
-        "command": ".venv/bin/pylint --msg-template \"{path}:{line}:{column}:{category}:{symbol} - {msg}\" py | sed 's/refactor/hint/g' | sed 's/convention/info/g'",
+        "command": "${config:python.binPath}/pylint --msg-template \"{path}:{line}:{column}:{category}:{symbol} - {msg}\" src/codename_snake | sed 's/refactor/hint/g' | sed 's/convention/info/g'",
         "windows": {
-          "command": ".venv/Scripts/pylint --msg-template \"{path}:{line}:{column}:{category}:{symbol} - {msg}\" py"
+          "command": "${config:python.binPath}/pylint --msg-template \"{path}:{line}:{column}:{category}:{symbol} - {msg}\" src/codename_snake"
         },
         "options": {
           "cwd": "${workspaceFolder}",
@@ -478,11 +469,45 @@
         }
       },
       {
+        "label": "flake8: whole project",
+        "type": "shell",
+        "command": "${config:python.binPath}/flake8 --format='%(path)s:%(row)s:%(col)s:info:%(code)s — %(text)s' src/codename_snake",
+        "windows": {
+          "command": "${config:python.binPath}/flake8 --format='%(path)s:%(row)s:%(col)s:info:%(code)s — %(text)s' src/codename_snake"
+        },
+        "options": {
+          "cwd": "${workspaceFolder}",
+          "env": {
+            "PYTHONPATH": "${workspaceFolder}"
+          }
+        },
+        "presentation": {
+          "reveal": "never",
+          "panel": "shared"
+        },
+        "problemMatcher": {
+          "owner": "python",
+          "fileLocation": [
+            "relative",
+            "${workspaceFolder}"
+          ],
+          "source": "flake8-task",
+          "pattern": {
+            "regexp": "^(.+):(\\d+):(\\d+):(\\w+):(.*)$",
+            "file": 1,
+            "line": 2,
+            "column": 3,
+            "severity": 4,
+            "message": 5
+          }
+        }
+      },
+      {
         "label": "mypy: whole project",
         "type": "shell",
-        "command": ".venv/bin/mypy --show-column-numbers  --no-error-summary py | sed 's/note/hint/g' | sed 's/convention/info/g'",
+        "command": "${config:python.binPath}/mypy --show-column-numbers  --no-error-summary src/codename_snake | sed 's/note/hint/g' | sed 's/convention/info/g'",
         "windows": {
-          "command": ".venv/Scripts/mypy --show-column-numbers  --no-error-summary py"
+          "command": "${config:python.binPath}/mypy --show-column-numbers  --no-error-summary src/codename_snake"
         },
         "options": {
           "cwd": "${workspaceFolder}",
@@ -517,7 +542,8 @@
         "type": "shell",
         "dependsOn": [
           "pylint: whole project",
-          "mypy: whole project"
+          "mypy: whole project",
+          "flake8: whole project"
         ],
         "problemMatcher": [],
         "group": {
