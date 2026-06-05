@@ -152,25 +152,11 @@
       ".vscode/*.py",
       "/**/"
     ],
-    "pylint.enabled": true,
-    "pylint.importStrategy": "fromEnvironment",
-    "pylint.ignorePatterns": [
-      "**/site-packages/**/*.py",
-      ".vscode/*.py",
-      "/**/"
+    "ruff.enable": true,
+    "ruff.interpreter": [
+      "${workspaceFolder:main}/.venv/bin/python3.13"
     ],
-    "pylint.cwd": "${workspaceFolder}",
-    "pylint.args": [],
-    "flake8.severity": {
-      "convention": "Information",
-      "error": "Error",
-      "fatal": "Error",
-      "refactor": "Hint",
-      "warning": "Warning",
-      "info": "Information"
-    },
-    "flake8.importStrategy": "fromEnvironment",
-    "flake8.cwd": "${workspaceFolder}",
+    "ruff.nativeServer": "on",
     "files.exclude": {
       "**/IdeaProjects": true
     },
