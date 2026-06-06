@@ -377,6 +377,11 @@
         "path": "/Library/Java/JavaVirtualMachines/corretto-1.8.0_402/Contents/Home",
         "default": false
       }
+    ],
+    "githubPullRequests.remotes": [
+      "origin",
+      "upstream",
+      "copi"
     ]
   },
   "tasks": {
