@@ -152,11 +152,14 @@
       ".vscode/*.py",
       "/**/"
     ],
+    "ruff.configuration": "${workspaceFolder}/pyproject.toml",
     "ruff.enable": true,
     "ruff.interpreter": [
-      "${workspaceFolder:main}/.venv/bin/python3.13"
+      "${workspaceFolder:main}/.venv/bin/python"
     ],
     "ruff.nativeServer": "on",
+    "ruff.importStrategy": "fromEnvironment",
+    "ruff.trace.server": "verbose",
     "files.exclude": {
       "**/IdeaProjects": true
     },
@@ -252,31 +255,31 @@
       },
       {
         "label": "My Closed PRs",
-        "query": "is:closed author:${user}"
+        "query": "repo:${owner}/${repository} is:closed author:${user}"
       },
       {
         "label": "Waiting For My Review",
-        "query": "is:open review-requested:${user}"
+        "query": "repo:${owner}/${repository} is:open review-requested:${user}"
       },
       {
         "label": "Assigned To Me",
-        "query": "is:open assignee:${user}"
+        "query": "repo:${owner}/${repository} is:open assignee:${user}"
       },
       {
         "label": "Created By Me",
-        "query": "is:open author:${user}"
+        "query": "repo:${owner}/${repository} is:open author:${user}"
       },
       {
         "label": "Waiting for My Review",
-        "query": "is:open review-requested:${user}"
+        "query": "repo:${owner}/${repository} is:open review-requested:${user}"
       },
       {
         "label": "Assigned to Me",
-        "query": "is:open assignee:${user}"
+        "query": "repo:${owner}/${repository} is:open assignee:${user}"
       },
       {
         "label": "Created by Me",
-        "query": "is:open author:${user}"
+        "query": "repo:${owner}/${repository} is:open author:${user}"
       },
       {
         "label": "All Open",
@@ -421,11 +424,11 @@
         "detail": "Runs the Java app with debugger and redirects output to java.log"
       },
       {
-        "label": "pylint: whole project",
+        "label": "ruff: whole project",
         "type": "shell",
-        "command": "${config:python.binPath}/pylint --msg-template \"{path}:{line}:{column}:{category}:{symbol} - {msg}\" src/codename_snake | sed 's/refactor/hint/g' | sed 's/convention/info/g'",
+        "command": "${config:python.binPath}/ruff check src/codename_snake --output-format=concise",
         "windows": {
-          "command": "${config:python.binPath}/pylint --msg-template \"{path}:{line}:{column}:{category}:{symbol} - {msg}\" src/codename_snake"
+          "command": "${config:python.binPath}/ruff check src/codename_snake --output-format=concise"
         },
         "options": {
           "cwd": "${workspaceFolder}",
@@ -443,48 +446,15 @@
             "relative",
             "${workspaceFolder}"
           ],
-          "source": "pylint-task",
+          "source": "ruff-task",
           "pattern": {
-            "regexp": "^(.+):(\\d+):(\\d+):(\\w+):(.*)$",
+            "regexp": "^(.+):(\\d+):(\\d+):\\s*(\\w+)\\s+(\\w+)\\s+(.*)$",
             "file": 1,
             "line": 2,
             "column": 3,
             "severity": 4,
-            "message": 5
-          }
-        }
-      },
-      {
-        "label": "flake8: whole project",
-        "type": "shell",
-        "command": "${config:python.binPath}/flake8 --format='%(path)s:%(row)s:%(col)s:info:%(code)s — %(text)s' src/codename_snake",
-        "windows": {
-          "command": "${config:python.binPath}/flake8 --format='%(path)s:%(row)s:%(col)s:info:%(code)s — %(text)s' src/codename_snake"
-        },
-        "options": {
-          "cwd": "${workspaceFolder}",
-          "env": {
-            "PYTHONPATH": "${workspaceFolder}"
-          }
-        },
-        "presentation": {
-          "reveal": "never",
-          "panel": "shared"
-        },
-        "problemMatcher": {
-          "owner": "python",
-          "fileLocation": [
-            "relative",
-            "${workspaceFolder}"
-          ],
-          "source": "flake8-task",
-          "pattern": {
-            "regexp": "^(.+):(\\d+):(\\d+):(\\w+):(.*)$",
-            "file": 1,
-            "line": 2,
-            "column": 3,
-            "severity": 4,
-            "message": 5
+            "code": 5,
+            "message": 6
           }
         }
       },
@@ -527,16 +497,15 @@
         "label": "Python quality code analysis",
         "type": "shell",
         "dependsOn": [
-          "pylint: whole project",
           "mypy: whole project",
-          "flake8: whole project"
+          "ruff: whole project"
         ],
         "problemMatcher": [],
         "group": {
           "kind": "build",
           "isDefault": true
         },
-        "detail": "Runs pylint and mypy on the whole project"
+        "detail": "Runs ruff and mypy on the whole project"
       },
       {
         "label": "No Build",
