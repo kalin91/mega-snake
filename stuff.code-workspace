@@ -57,7 +57,7 @@
         "console": "integratedTerminal",
         "python": "${config:python.defaultInterpreterPath}",
         "request": "launch",
-        "module": "codename_snake",
+        "module": "mega_snake",
         "args": [
           "--shell",
           "zsh",
@@ -123,7 +123,7 @@
           "msg",
           "hello world!"
         ],
-        "module": "codename_snake",
+        "module": "mega_snake",
         "python": "${config:python.defaultInterpreterPath}",
         "console": "integratedTerminal"
       }
@@ -332,9 +332,9 @@
     "java.import.gradle.version": "8.11",
     "java.import.gradle.wrapper.enabled": false,
     "git-blame.gitWebUrl": "https://github.com/kalin91/unix-scripts/tree/$ID",
-    "snake.java.remoteDebug.port": 5005,
-    "snake.java.remoteDebug.profile": "dev",
-    "snake.java.remoteDebug.jar": "build/libs/*.jar",
+    "mgsnake.java.remoteDebug.port": 5005,
+    "mgsnake.java.remoteDebug.profile": "dev",
+    "mgsnake.java.remoteDebug.jar": "build/libs/*.jar",
     "java.import.gradle.java.home": "/Library/Java/JavaVirtualMachines/temurin-21.jdk/Contents/Home",
     "java.configuration.runtimes": [
       {
@@ -431,9 +431,9 @@
       {
         "label": "ruff: whole project",
         "type": "shell",
-        "command": "${config:python.binPath}/ruff check src/codename_snake --output-format=concise",
+        "command": "${config:python.binPath}/ruff check src/mega_snake --output-format=concise",
         "windows": {
-          "command": "${config:python.binPath}/ruff check src/codename_snake --output-format=concise"
+          "command": "${config:python.binPath}/ruff check src/mega_snake --output-format=concise"
         },
         "options": {
           "cwd": "${workspaceFolder}",
@@ -466,9 +466,9 @@
       {
         "label": "mypy: whole project",
         "type": "shell",
-        "command": "${config:python.binPath}/mypy --show-column-numbers  --no-error-summary src/codename_snake | sed 's/note/hint/g' | sed 's/convention/info/g'",
+        "command": "${config:python.binPath}/mypy --show-column-numbers  --no-error-summary src/mega_snake | sed 's/note/hint/g' | sed 's/convention/info/g'",
         "windows": {
-          "command": "${config:python.binPath}/mypy --show-column-numbers  --no-error-summary src/codename_snake"
+          "command": "${config:python.binPath}/mypy --show-column-numbers  --no-error-summary src/mega_snake"
         },
         "options": {
           "cwd": "${workspaceFolder}",
@@ -565,10 +565,10 @@
         "type": "shell",
         "command": "java",
         "args": [
-          "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=${config:snake.java.remoteDebug.port}",
-          "-Dspring.profiles.active=${config:snake.java.remoteDebug.profile}",
+          "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=${config:mgsnake.java.remoteDebug.port}",
+          "-Dspring.profiles.active=${config:mgsnake.java.remoteDebug.profile}",
           "-jar",
-          "${config:snake.java.remoteDebug.jar}",
+          "${config:mgsnake.java.remoteDebug.jar}",
           ">",
           "'/Users/carlosmorales/IdeaProjects/stuff/workspace_temp/logs/java_debug_${input:todayTimestamp}.log'",
           "2>&1"
