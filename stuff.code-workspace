@@ -116,12 +116,10 @@
         "type": "debugpy",
         "request": "launch",
         "args": [
-          "--shell",
-          "zsh",
           "-l",
           "debug",
-          "msg",
-          "hello world!"
+          "shell-path",
+          "bash"
         ],
         "module": "mega_snake",
         "python": "${config:python.defaultInterpreterPath}",
