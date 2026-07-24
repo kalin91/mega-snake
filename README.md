@@ -203,6 +203,24 @@ Creates a GitHub release and tag for the project.
   - `notes`: (Optional) Release notes.
   - `branch`: (Optional) Branch to create release from (defaults to current).
 
+#### Dependency Management
+
+##### `mgsnake scan-dependencies` (aliases: `sdep`, `audit`)
+
+Audits the project's locked dependencies (`uv.lock`) with [`pip-audit`](https://github.com/pypa/pip-audit)
+against the [OSV](https://osv.dev/) advisory database and files a GitHub issue (package, installed
+version, recommended version, severity, and advisory link) for each vulnerability that hasn't already
+been reported.
+
+- **Usage**: `mgsnake scan-dependencies [--dry-run]`
+- `--dry-run`: Print findings without creating GitHub issues.
+- Requires the `gh` CLI to be authenticated (used to list/create issues).
+- Deduplication works by searching existing open/closed issues for a matching `[dependency-scan]` title,
+  so re-running the scan never files the same finding twice.
+- See [`.github/dependabot.yml`](.github/dependabot.yml) for automated dependency-update PRs, and
+  [`docs/dependency-scan-workflow.yml`](docs/dependency-scan-workflow.yml) for a ready-to-copy GitHub
+  Actions workflow that runs this command on a weekly schedule and on PRs touching `pyproject.toml`/`uv.lock`.
+
 #### Utilities
 
 ##### `mgsnake graphql-schema` (aliases: `graphql`, `gql`, `cgs`)

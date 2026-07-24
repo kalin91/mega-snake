@@ -6,6 +6,7 @@ from mega_snake.light_weight.shell_init import shell_path, get_local_config_path
 from mega_snake.light_weight.echo import echo
 from mega_snake.light_weight.create_release import create_release
 from mega_snake.light_weight.jks_expired_certs import expired_certs
+from mega_snake.light_weight.dependency_scan import scan_dependencies
 from mega_snake.util.cli_group import CliGroup
 from mega_snake.util.util import wrapper_decorator
 
@@ -26,5 +27,6 @@ add_wrapper = wrapper_decorator(wrapper)
 main.add_command_with_alias(echo, ["message"])
 main.add_command_with_alias(create_release, ["release", "cr"])
 main.add_command_with_alias(expired_certs, ["ecj"])
+main.add_command_with_alias(scan_dependencies, ["sdep", "audit"])
 main.add_command_with_alias(shell_path, ["sp"])
 main.add_command_with_alias(get_local_config_path, ["lcp"])

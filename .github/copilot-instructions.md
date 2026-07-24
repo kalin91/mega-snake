@@ -194,7 +194,24 @@ We use the `gh` (GitHub CLI) tool because it leverages the user's existing authe
 **Educational Logic:**
 Instead of re-implementing the GitHub API client (which requires managing OAuth tokens, permissions, etc.), we delegate the heavy lifting to the `gh` binary. This is a common "shell wrapper" pattern where Python manages the *control flow* and *validation*, but the shell executes the *remote action*.
 
-### 3.5 Other Utilities
+### 3.5 Dependency Vulnerability Scanning (`src/mega_snake/light_weight/dependency_scan*.py`)
+
+#### `scan-dependencies`
+Audits the project's own dependencies for known vulnerabilities and files a GitHub issue per new finding.
+
+**Logic:**
+1. Exports the locked dependency set from `uv.lock` via `uv export --format requirements-txt` (`dependency_scan_handler.export_requirements`).
+2. Runs `pip-audit` against that file, requesting JSON output so it can be parsed programmatically (`dependency_scan_handler.run_pip_audit`).
+3. Parses the report into `Vulnerability` instances (`vulnerability.parse_pip_audit_output`) capturing package, installed version, recommended fix version, severity (when the advisory provides one), and an OSV advisory link.
+4. Deduplicates against existing issues: `gh issue list --search "[dependency-scan] in:title"` returns previously filed titles (open **and** closed), so a finding is only reported once, ever.
+5. Files one `gh issue create` per new finding (`dependency_scan_handler.create_issue`), following the same "shell wrapper via `run_operation`" pattern used by `create-release`.
+
+**Why `pip-audit` + Dependabot instead of a paid SCA tool?**
+`pip-audit` is PyPA's own open-source auditor and queries the free [OSV](https://osv.dev/) database — no license, no API key. Dependabot (`.github/dependabot.yml`) is native to GitHub and free for this use case; it complements `scan-dependencies` by opening update PRs, while `scan-dependencies` is responsible for the "file an issue with full context" requirement.
+
+**Automation:** because this GitHub App's permissions don't allow writing under `.github/workflows/`, the scheduled/PR workflow that invokes `mgsnake scan-dependencies` is committed as a template at `docs/dependency-scan-workflow.yml` — copy it into `.github/workflows/` to activate scheduled scanning.
+
+### 3.6 Other Utilities
 
 #### `graphql-schema` (`graphql_schema.py`)
 Compiles multiple `.graphql` files into a single schema and generates introspection JSON.
